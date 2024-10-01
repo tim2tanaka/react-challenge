@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App render App 1`] = `
+<div>
+  <header
+    class="App-header"
+  >
+    <h2>
+      Country search
+    </h2>
+  </header>
+  <div
+    class="Search"
+  >
+    <input
+      class="searchInput"
+      placeholder="Search..."
+      type="text"
+    />
+    <button
+      class="button"
+    >
+      Search
+    </button>
+  </div>
+  <div
+    id="search-results-container"
+  />
+</div>
+`;
