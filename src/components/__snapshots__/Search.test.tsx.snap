@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search render Search 1`] = `
+<div>
+  <div
+    class="search"
+  >
+    <label>
+      Country search:
+      <input
+        class="search-input"
+        placeholder="Search for a country..."
+        type="text"
+        value=""
+      />
+    </label>
+    <button
+      class="button"
+    >
+      Find
+    </button>
+  </div>
+</div>
+`;

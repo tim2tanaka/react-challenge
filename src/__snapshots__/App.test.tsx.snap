@@ -3,28 +3,83 @@
 exports[`App render App 1`] = `
 <div>
   <header
-    class="App-header"
+    class="app-header"
   >
     <h2>
-      Country search
+      Country Search App
     </h2>
   </header>
   <div
-    class="Search"
+    class="search"
   >
-    <input
-      class="searchInput"
-      placeholder="Search..."
-      type="text"
-    />
+    <label>
+      Country search:
+      <input
+        class="search-input"
+        placeholder="Search for a country..."
+        type="text"
+        value=""
+      />
+    </label>
     <button
       class="button"
     >
-      Search
+      Find
     </button>
   </div>
   <div
-    id="search-results-container"
+    class="dropdownList-hide"
+  >
+    <select
+      class="select-dropdown"
+    >
+      <option
+        value="5"
+      >
+        5
+      </option>
+      <option
+        value="10"
+      >
+        10
+      </option>
+      <option
+        value="15"
+      >
+        15
+      </option>
+      <option
+        value="20"
+      >
+        20
+      </option>
+    </select>
+  </div>
+  <div
+    class="pagination-hide"
+  />
+  <section
+    class="search-display"
+  />
+  <div>
+    <span
+      class="error-msg"
+    >
+       
+       
+    </span>
+  </div>
+  <div
+    class="loading-hide"
+  >
+    <img
+      alt="loading-logo"
+      class="loading-logo"
+      src="spinner.svg"
+    />
+  </div>
+  <div
+    class="pagination-hide"
   />
 </div>
 `;
