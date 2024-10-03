@@ -23,4 +23,4 @@ yarn test:coverage
 2. Add cypress tests
 3. Better UX design
 4. Optimize pagination
-5. Complete pagination: implement hide btn logic
+5. Complete pagination: Implement hide btn & disable btn logic 
