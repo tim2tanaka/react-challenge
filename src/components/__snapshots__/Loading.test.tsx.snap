@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading render Loading 1`] = `
+<div>
+  <div
+    class="loading-hide"
+  >
+    <img
+      alt="loading-logo"
+      class="loading-logo"
+      src="spinner.svg"
+    />
+  </div>
+</div>
+`;

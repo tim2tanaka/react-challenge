@@ -6,7 +6,11 @@ export function SearchDisplay() {
     <section className="search-display">
       {state.data.map((x: any, idx) => {
         return (
-          <div className="dashed-line-boarder" key={`country-${idx}`}>
+          <div
+            title="search-data"
+            className="dashed-line-boarder"
+            key={`country-${idx}`}
+          >
             {x.flag} {x.name.official}
             <br />
             Capital: {x.capital}

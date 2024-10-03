@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorDisplay render ErrorDisplay 1`] = `
+<div>
+  <div>
+    <span
+      class="error-msg"
+    >
+       
+       
+    </span>
+  </div>
+</div>
+`;
