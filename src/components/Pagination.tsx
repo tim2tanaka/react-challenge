@@ -8,15 +8,12 @@ export function Pagination() {
   const dispatch = useAppDispatch();
 
   const [loadPage, setLoadPage] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     if (state.search) loadData();
     setLoadPage(false);
   }, [loadPage]);
-
-  const isNextPage =
-    state.totalPages > state.pagination.resultsPerPage * state.pagination.page;
-  const isBackPage = isNextPage;
 
   function getPaginationData(data: Data['data']) {
     const { page, resultsPerPage } = state.pagination;
@@ -50,6 +47,7 @@ export function Pagination() {
   async function handleBtnClick(btn: string): Promise<void> {
     if (btn === 'back') {
       setLoadPage(true);
+      if (pageNumber > 0) setPageNumber((prevNum)=> prevNum - 1);
       dispatch({
         type: actions.setPagination.type,
         payload: {
@@ -60,6 +58,7 @@ export function Pagination() {
     }
     if (btn === 'next') {
       setLoadPage(true);
+      setPageNumber((prevNum)=> prevNum + 1);
       dispatch({
         type: actions.setPagination.type,
         payload: {
@@ -69,8 +68,13 @@ export function Pagination() {
       });
     }
   }
-  const paginationClass =
+    const paginationClass =
     state.search && state.data.length ? 'pagination' : 'pagination-hide';
+
+    const isNextPage =
+    state.totalPages > state.pagination.resultsPerPage * state.pagination.page;
+
+  const isBackPage = pageNumber > 1;
   return (
     <div className={paginationClass}>
       {isBackPage && (
@@ -83,6 +87,9 @@ export function Pagination() {
           {`< BACK`}
         </button>
       )}
+      { true && <div>
+        <span className="select-dropdown"> Page: {pageNumber} </span>
+      </div> }
       {isNextPage && (
         <button
           onClick={() => {
