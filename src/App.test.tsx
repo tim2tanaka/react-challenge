@@ -111,7 +111,7 @@ describe('App', () => {
       expect(rows).toHaveLength(5);
     });
 
-    test(' displays next page on "NEXT >" btn click', async () => {
+    test(' displays next page on "BACK >" btn click', async () => {
       render(<App />);
       const findBtn = screen.getByRole('button', { name: 'Find' });
       const input = screen.getByPlaceholderText('Search for a country...');
@@ -123,9 +123,9 @@ describe('App', () => {
       fireEvent.click(findBtn);
       let rows = await screen.findAllByTitle('search-data');
       const nextBtn = screen.getByRole('button', { name: 'NEXT >' });
-      const backBtn = screen.getByRole('button', { name: '< BACK' });
       fireEvent.click(nextBtn);
       rows = await screen.findAllByTitle('search-data');
+      const backBtn = screen.getByRole('button', { name: '< BACK' });
       fireEvent.click(backBtn);
       expect(rows).toHaveLength(5);
     });

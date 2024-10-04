@@ -23,6 +23,7 @@ export function DropdownList() {
   }
 
   async function loadData() {
+    const { resultsPerPage } = state.pagination;
     const url = 'https://restcountries.com/v3.1/name';
     try {
       dispatch({ type: actions.clearData.type, payload: [] });
@@ -31,6 +32,7 @@ export function DropdownList() {
       const res = await fetch(`${url}/${state.search}`);
       if (res.status !== 200) throw new Error('Country search failed!');
       const data = await res.json();
+      if (data.length < resultsPerPage) return
       const paginationData: Data['data'] = getPaginationData(data);
       dispatch({ type: actions.setData.type, payload: paginationData });
       dispatch({ type: actions.setIsloading.type });
