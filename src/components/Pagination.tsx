@@ -72,7 +72,7 @@ export function Pagination() {
     state.search && state.data.length ? 'pagination' : 'pagination-hide';
 
     const isNextPage =
-    state.totalPages > state.pagination.resultsPerPage * state.pagination.page;
+    state.totalPages > state.pagination.resultsPerPage * pageNumber;
 
   const isBackPage = pageNumber > 1;
   return (
