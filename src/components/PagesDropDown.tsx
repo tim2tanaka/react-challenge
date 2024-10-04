@@ -14,9 +14,7 @@ export function DropdownList() {
   }, [menuSelect]);
 
   function getPaginationData(data: Data['data']) {
-    // const minPageResults = 5;
     const { page, resultsPerPage } = state.pagination;
-    // const paginationPageResults = data.length < resultsPerPage ? minPageResults : resultsPerPage;
     const resultsPage = page <= 0 ? 1 : page;
     const startIndex = (resultsPage - 1) * resultsPerPage;
     const endIndex = startIndex + resultsPerPage;
