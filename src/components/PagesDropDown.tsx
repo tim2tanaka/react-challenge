@@ -11,6 +11,7 @@ export function DropdownList() {
 
   useEffect(() => {
     if (state.search) loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menuSelect]);
 
   function getPaginationData(data: Data['data']) {
@@ -23,7 +24,6 @@ export function DropdownList() {
   }
 
   async function loadData() {
-    const { resultsPerPage } = state.pagination;
     const url = 'https://restcountries.com/v3.1/name';
     try {
       dispatch({ type: actions.clearData.type, payload: [] });

@@ -13,10 +13,11 @@ export function Pagination() {
   useEffect(() => {
     if (state.search) loadData();
     setLoadPage(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadPage]);
 
   function getPaginationData(data: Data['data']) {
-    const { page, resultsPerPage } = state.pagination;
+    const { resultsPerPage } = state.pagination;
     const resultsPage = pageNumber <= 0 ? 1 : pageNumber;
     const startIndex = (resultsPage - 1) * resultsPerPage;
     const endIndex = startIndex + resultsPerPage;
