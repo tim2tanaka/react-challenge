@@ -14,7 +14,9 @@ export function DropdownList() {
   }, [menuSelect]);
 
   function getPaginationData(data: Data['data']) {
+    // const minPageResults = 5;
     const { page, resultsPerPage } = state.pagination;
+    // const paginationPageResults = data.length < resultsPerPage ? minPageResults : resultsPerPage;
     const resultsPage = page <= 0 ? 1 : page;
     const startIndex = (resultsPage - 1) * resultsPerPage;
     const endIndex = startIndex + resultsPerPage;
@@ -32,7 +34,6 @@ export function DropdownList() {
       const res = await fetch(`${url}/${state.search}`);
       if (res.status !== 200) throw new Error('Country search failed!');
       const data = await res.json();
-      if (data.length < resultsPerPage) return
       const paginationData: Data['data'] = getPaginationData(data);
       dispatch({ type: actions.setData.type, payload: paginationData });
       dispatch({ type: actions.setIsloading.type });

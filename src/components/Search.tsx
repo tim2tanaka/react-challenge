@@ -31,6 +31,8 @@ export function Search() {
 
   function getPaginationData(data: Data['data']) {
     const { page, resultsPerPage } = state.pagination;
+    // const minPageResults = 5;
+    // const paginationPageResults = data.length < resultsPerPage ? minPageResults : resultsPerPage;
     const resultsPage = page <= 0 ? 1 : page;
     const startIndex = (resultsPage - 1) * resultsPerPage;
     const endIndex = startIndex + resultsPerPage;
