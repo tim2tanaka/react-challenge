@@ -4,6 +4,16 @@ exports[`Pagination render Pagination 1`] = `
 <div>
   <div
     class="pagination-hide"
-  />
+  >
+    <div>
+      <span
+        class="select-dropdown"
+      >
+         Page: 
+        1
+         
+      </span>
+    </div>
+  </div>
 </div>
 `;
