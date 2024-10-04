@@ -17,7 +17,7 @@ export function Pagination() {
 
   function getPaginationData(data: Data['data']) {
     const { page, resultsPerPage } = state.pagination;
-    const resultsPage = page <= 0 ? 1 : page;
+    const resultsPage = pageNumber <= 0 ? 1 : pageNumber;
     const startIndex = (resultsPage - 1) * resultsPerPage;
     const endIndex = startIndex + resultsPerPage;
     dispatch({ type: actions.setTotalPages.type, payload: data.length });
@@ -51,7 +51,7 @@ export function Pagination() {
       dispatch({
         type: actions.setPagination.type,
         payload: {
-          page: state.pagination.page - 1,
+          page: pageNumber - 1,
           resultsPerPage: state.pagination.resultsPerPage,
         },
       });
@@ -62,7 +62,7 @@ export function Pagination() {
       dispatch({
         type: actions.setPagination.type,
         payload: {
-          page: state.pagination.page + 2,
+          page: pageNumber + 1,
           resultsPerPage: state.pagination.resultsPerPage,
         },
       });
