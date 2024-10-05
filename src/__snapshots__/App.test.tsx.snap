@@ -29,34 +29,9 @@ exports[`App render App 1`] = `
   </div>
   <div
     class="dropdownList-hide"
-  >
-    <select
-      class="select-dropdown"
-    >
-      <option
-        value="5"
-      >
-        5
-      </option>
-      <option
-        value="10"
-      >
-        10
-      </option>
-      <option
-        value="15"
-      >
-        15
-      </option>
-      <option
-        value="20"
-      >
-        20
-      </option>
-    </select>
-  </div>
+  />
   <section
-    class="search-display"
+    class="search-display-hide"
   />
   <div>
     <span
@@ -67,26 +42,7 @@ exports[`App render App 1`] = `
     </span>
   </div>
   <div
-    class="loading-hide"
-  >
-    <img
-      alt="loading-logo"
-      class="loading-logo"
-      src="spinner.svg"
-    />
-  </div>
-  <div
     class="pagination-hide"
-  >
-    <div>
-      <span
-        class="select-dropdown"
-      >
-         Page: 
-        1
-         
-      </span>
-    </div>
-  </div>
+  />
 </div>
 `;

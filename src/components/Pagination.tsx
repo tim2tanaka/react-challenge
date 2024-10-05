@@ -1,53 +1,21 @@
 import { useState, useEffect } from 'react';
 import { actions } from '../app_state/actions';
 import { useAppState, useAppDispatch } from '../app_state/context';
-import { Data } from '../types';
+import { PaginationProps } from '../types';
 
-export function Pagination() {
+export function Pagination({loadData}: PaginationProps) {
   const state = useAppState();
   const dispatch = useAppDispatch();
 
-  const [loadPage, setLoadPage] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    if (state.search) loadData();
-    setLoadPage(false);
+    if (state.search) loadData(state.search, pageNumber);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadPage]);
-
-  function getPaginationData(data: Data['data']) {
-    const { resultsPerPage } = state.pagination;
-    const resultsPage = pageNumber <= 0 ? 1 : pageNumber;
-    const startIndex = (resultsPage - 1) * resultsPerPage;
-    const endIndex = startIndex + resultsPerPage;
-    dispatch({ type: actions.setTotalPages.type, payload: data.length });
-    return data.slice(startIndex, endIndex);
-  }
-
-  async function loadData() {
-    const url = 'https://restcountries.com/v3.1/name';
-    try {
-      dispatch({ type: actions.clearData.type, payload: [] });
-      dispatch({ type: actions.setIsloading.type });
-      dispatch({ type: actions.clearErrorMsg.type });
-      const res = await fetch(`${url}/${state.search}`);
-      if (res.status !== 200) throw new Error('Country search failed!');
-      const data = await res.json();
-      const paginationData: Data['data'] = getPaginationData(data);
-      dispatch({ type: actions.setData.type, payload: paginationData });
-      dispatch({ type: actions.setIsloading.type });
-      dispatch({ type: actions.setTotalPages.type, payload: data.length });
-    } catch (error: any) {
-      if (error?.message)
-        dispatch({ type: actions.setErrorMsg.type, payload: error.message });
-      dispatch({ type: actions.setIsloading.type });
-    }
-  }
+  }, [pageNumber]);
 
   async function handleBtnClick(btn: string): Promise<void> {
     if (btn === 'back') {
-      setLoadPage(true);
       if (pageNumber > 0) setPageNumber((prevNum)=> prevNum - 1);
       dispatch({
         type: actions.setPagination.type,
@@ -58,7 +26,6 @@ export function Pagination() {
       });
     }
     if (btn === 'next') {
-      setLoadPage(true);
       setPageNumber((prevNum)=> prevNum + 1);
       dispatch({
         type: actions.setPagination.type,
@@ -88,7 +55,7 @@ export function Pagination() {
           {`< BACK`}
         </button>
       )}
-      { true && <div>
+      { !!state.data.length && <div>
         <span className="select-dropdown"> Page: {pageNumber} </span>
       </div> }
       {isNextPage && (

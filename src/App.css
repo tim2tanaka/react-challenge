@@ -76,6 +76,11 @@
   margin: 8px;
 }
 
+.search-display-hide {
+  display: none;
+  visibility: hidden;
+}
+
 .error-msg {
   background-color: #ffffff;
   display: flex;

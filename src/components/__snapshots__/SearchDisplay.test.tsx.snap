@@ -1,23 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loading render Loading 1`] = `
-<div>
-  <div
-    class="loading-hide"
-  >
-    <img
-      alt="loading-logo"
-      class="loading-logo"
-      src="spinner.svg"
-    />
-  </div>
-</div>
-`;
-
 exports[`SearchDisplay render SearchDisplay 1`] = `
 <div>
   <section
-    class="search-display"
+    class="search-display-hide"
   />
 </div>
 `;

@@ -4,21 +4,21 @@ import { Provider } from './app_state/context';
 
 describe('App', () => {
   test('render App', () => {
-    const { container } = render(<App />);
+    const { container } = render(<Provider><App /></Provider>);
     expect(container).toMatchSnapshot();
   });
   test('renders header', () => {
-    render(<App />);
+    render(<Provider><App /></Provider>);
     const headerElement = screen.queryByText('Country Search App');
     expect(headerElement).toBeInTheDocument();
   });
   test('renders search button', () => {
-    render(<App />);
-    const headerElement = screen.getAllByRole('button');
-    expect(headerElement[0]).toHaveTextContent('Find');
+    render(<Provider><App /></Provider>);
+    const findBtn = screen.getByRole('button', { name: 'Find' });
+    expect(findBtn).toHaveTextContent('Find');
   });
   test('search btn clicked, renders error', async () => {
-    render(<App />);
+    render(<Provider><App /></Provider>);
     const findBtn = screen.getByRole('button', { name: 'Find' });
     fireEvent.click(findBtn);
     expect(
@@ -26,7 +26,7 @@ describe('App', () => {
     ).toBeInTheDocument();
   });
   test('change input and btn click renders data', async () => {
-    render(<App />);
+    render(<Provider><App /></Provider>);
     const findBtn = screen.getByRole('button', { name: 'Find' });
     fireEvent.click(findBtn);
     expect(
@@ -39,7 +39,7 @@ describe('App', () => {
       jest.mock('./__mocks__/fetch');
     });
     test('change input and btn click renders data', async () => {
-      render(<App />);
+      render(<Provider><App /></Provider>);
       const findBtn = screen.getByRole('button', { name: 'Find' });
       const input = screen.getByPlaceholderText('Search for a country...');
       fireEvent.change(input, {
@@ -53,7 +53,7 @@ describe('App', () => {
     });
 
     test.skip('change pages display and btn click renders data', async () => {
-      render(<App />);
+      render(<Provider><App /></Provider>);
       const findBtn = screen.getByRole('button', { name: 'Find' });
       const input = screen.getByPlaceholderText('Search for a country...');
       const dropdown = screen.getByDisplayValue('5');
@@ -74,16 +74,17 @@ describe('App', () => {
     });
 
     test('clears pages display on "Clear" btn click', async () => {
-      render(<App />);
+      render(<Provider><App /></Provider>);
       const findBtn = screen.getByRole('button', { name: 'Find' });
       const input = screen.getByPlaceholderText('Search for a country...');
-      const dropdown = screen.getByDisplayValue(5);
       fireEvent.change(input, {
         target: {
           value: 'us',
         },
       });
       fireEvent.click(findBtn);
+      await screen.findAllByTitle('search-data');
+      const dropdown = screen.getByDisplayValue(5);
       fireEvent.change(dropdown, {
         target: {
           value: 10,
@@ -95,8 +96,8 @@ describe('App', () => {
       expect(rows.length).toBeGreaterThanOrEqual(5);
     });
 
-    test(' displays next page on "NEXT >" btn click', async () => {
-      render(<App />);
+    test('displays next page on "NEXT >" btn click', async () => {
+      render(<Provider><App /></Provider>);
       const findBtn = screen.getByRole('button', { name: 'Find' });
       const input = screen.getByPlaceholderText('Search for a country...');
       fireEvent.change(input, {
@@ -112,7 +113,7 @@ describe('App', () => {
     });
 
     test(' displays next page on "BACK >" btn click', async () => {
-      render(<App />);
+      render(<Provider><App /></Provider>);
       const findBtn = screen.getByRole('button', { name: 'Find' });
       const input = screen.getByPlaceholderText('Search for a country...');
       fireEvent.change(input, {
