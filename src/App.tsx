@@ -14,9 +14,10 @@ function App() {
   const state = useAppState();
   const dispatch = useAppDispatch();
 
-  async function loadData(searchText:string, pageNumber: number) {
-    const searchTxt = searchText ? searchText : state.search;
-    const currentPage = pageNumber ? pageNumber : state.pagination.page;
+  async function loadData(searchText:string) {
+    const { search, pagination } = state;
+    const searchTxt = searchText ? searchText : search;
+    const currentPage = pagination.page;
     dispatch({ type: actions.setIsloading.type });
 
     function getPaginationData(data: Data['data']) {

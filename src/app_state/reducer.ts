@@ -48,7 +48,10 @@ export function reducer(state: State, action: Action) {
     case `${actions.clearPagination.type}`: {
       return {
         ...state,
-        pagination: {},
+        pagination: {
+          page: 1,
+          resultsPerPage: 5,
+        },
       };
     }
     case `${actions.setIsloading.type}`: {

@@ -20,7 +20,7 @@ export type Data = {
 };
 
 export type PaginationProps = {
-    loadData: (searchText:string, pageNumber: number)=>Promise<void>;
+    loadData: (searchText:string)=>Promise<void>;
 };
 
 export type HeaderProps = {

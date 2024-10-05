@@ -9,8 +9,10 @@ export function DropdownList({loadData}: PaginationProps) {
 
   const [menuSelect, setMenuSelect] = useState(0);
 
+  const { search, data, pagination } = state;
+
   useEffect(() => {
-    if (state.search) loadData(state.search, state.pagination.page);
+    if (search) loadData(search);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menuSelect]);
 
@@ -20,18 +22,18 @@ export function DropdownList({loadData}: PaginationProps) {
     dispatch({
       type: actions.setPagination.type,
       payload: {
-        page: state.pagination.page,
+        page: pagination.page,
         resultsPerPage: pages,
       },
     });
   }
   const dropdownListClass =
-    state.search && state.data.length ? 'dropdownList' : 'dropdownList-hide';
+    search && data.length ? 'dropdownList' : 'dropdownList-hide';
   return (
     <div className={dropdownListClass}>
-      {!!state.data.length && <select
+      {!!data.length && <select
         className="select-dropdown"
-        value={state.pagination.resultsPerPage}
+        value={pagination.resultsPerPage}
         onChange={(event) => handleChange(event)}
       >
         <option value={'5'}>5</option>

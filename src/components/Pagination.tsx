@@ -7,42 +7,45 @@ export function Pagination({loadData}: PaginationProps) {
   const state = useAppState();
   const dispatch = useAppDispatch();
 
-  const [pageNumber, setPageNumber] = useState(1);
+  const [loadPage, setLoadPage] = useState(false);
+
+  const { search, data, pagination } = state;
 
   useEffect(() => {
-    if (state.search) loadData(state.search, pageNumber);
+    if (search) loadData(search);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNumber]);
+  },[loadPage]);
 
   async function handleBtnClick(btn: string): Promise<void> {
     if (btn === 'back') {
-      if (pageNumber > 0) setPageNumber((prevNum)=> prevNum - 1);
+      setLoadPage(!loadPage);
       dispatch({
         type: actions.setPagination.type,
         payload: {
-          page: pageNumber - 1,
-          resultsPerPage: state.pagination.resultsPerPage,
+          page: pagination.page - 1,
+          resultsPerPage: pagination.resultsPerPage,
         },
       });
     }
     if (btn === 'next') {
-      setPageNumber((prevNum)=> prevNum + 1);
+      setLoadPage(!loadPage);
       dispatch({
         type: actions.setPagination.type,
         payload: {
-          page: pageNumber + 1,
-          resultsPerPage: state.pagination.resultsPerPage,
+          page: pagination.page + 1,
+          resultsPerPage: pagination.resultsPerPage,
         },
       });
     }
+    setLoadPage(!loadPage);
   }
     const paginationClass =
-    state.search && state.data.length ? 'pagination' : 'pagination-hide';
+    search && data.length ? 'pagination' : 'pagination-hide';
 
     const isNextPage =
-    state.totalPages > state.pagination.resultsPerPage * pageNumber;
+    state.totalPages > pagination.resultsPerPage * pagination.page;
 
-  const isBackPage = pageNumber > 1;
+  const isBackPage = pagination.page > 1;
   return (
     <div className={paginationClass}>
       {isBackPage && (
@@ -55,8 +58,8 @@ export function Pagination({loadData}: PaginationProps) {
           {`< BACK`}
         </button>
       )}
-      { !!state.data.length && <div>
-        <span className="select-dropdown"> Page: {pageNumber} </span>
+      { !!data.length && <div>
+        <span className="select-dropdown"> Page: {pagination.page} </span>
       </div> }
       {isNextPage && (
         <button

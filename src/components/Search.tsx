@@ -11,8 +11,11 @@ export function Search({loadData}: PaginationProps) {
 
   function handleSearchInput(event: ChangeEvent<HTMLInputElement>): void {
     setInputText(event.target.value);
+    dispatch({ type: actions.clearData.type, payload: [] });
+    dispatch({ type: actions.clearSearch.type });
+    dispatch({ type: actions.clearTotalPages.type });
+    dispatch({ type: actions.clearPagination.type });
     dispatch({ type: actions.setSearch.type, payload: event.target.value });
-    if (event.target.value === '') dispatch({ type: actions.clearData.type });
   }
 
   async function handleBtnClick(btn: string): Promise<void> {
@@ -20,10 +23,11 @@ export function Search({loadData}: PaginationProps) {
       dispatch({ type: actions.clearData.type, payload: [] });
       dispatch({ type: actions.clearSearch.type });
       dispatch({ type: actions.clearTotalPages.type });
+      dispatch({ type: actions.clearPagination.type });
       setInputText('');
     }
     if (btn === 'search') {
-      loadData(inputText, state.pagination.page);
+      loadData(inputText);
     }
   }
 
